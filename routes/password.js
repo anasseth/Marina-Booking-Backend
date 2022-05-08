@@ -13,44 +13,28 @@ const requestLogger = (request, response, next) => {
 
 router.use(requestLogger);
 
+// Receive Admin ID & Password
 router.get("/", (request, response) => {
   AdminCredentials.find({}).then((object) => {
     response.json(object);
   });
 });
 
-router.post("/", (request, response) => {
-  const body = request.body;
+// router.post("/", (request, response) => {
+//   const body = request.body;
+//   if (body.name == undefined || body.password == undefined) {
+//     return response.status(400).json({ error: "Name or Price is Missing" });
+//   }
+//   const adminCredentials = adminCredentials({
+//     name: body.name,
+//     password: body.password,
+//   });
+//   AdminCredentials.save().then((object) => {
+//     response.json(object);
+//   });
+// });
 
-  if (body.name == undefined || body.password == undefined) {
-    return response.status(400).json({ error: "Name or Price is Missing" });
-  }
-
-  const adminCredentials = adminCredentials({
-    name: body.name,
-    password: body.password,
-  });
-
-  AdminCredentials.save().then((object) => {
-    response.json(object);
-  });
-});
-
-router.get("/:id", (request, response, next) => {
-  AdminCredentials.findById(request.params.id)
-    .then((object) => {
-      if (object) {
-        response.json(object);
-      } else {
-        response.status(404).end();
-      }
-    })
-    .catch((error) => {
-      console.log("WAT IS THIS");
-      next(error);
-    });
-});
-
+// Delete Admin Account
 router.delete("/:id", (request, response, next) => {
   AdminCredentials.findByIdAndRemove(request.params.id)
     .then((result) => {
@@ -59,14 +43,14 @@ router.delete("/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
+
+// Update password
 router.put("/:id", (request, response, next) => {
   const body = request.body;
-
   const adminCredentials = {
     name: body.name,
     password: body.password,
   };
-
   AdminCredentials.findByIdAndUpdate(request.params.id, adminCredentials, {
     new: true,
   })

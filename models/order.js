@@ -1,3 +1,4 @@
+// General Structure For Creating an API Model/Schema/Structure
 const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema({
@@ -11,17 +12,20 @@ const bookingSchema = new mongoose.Schema({
   lastName: String,
   email: String,
   address: String,
+  contact: String,
+  additionalInfo: String,
   phoneNumber: String,
   paypal: Boolean,
+  stripe: Boolean,
   creditCard: Boolean,
   creditCardNumber: String,
   status: String,
   boat: {
-    boat_name:String,
-    boat_detail:String,
-    boat_price_per_person:String,
-    boat_qty:String,
-    boat_stay:String
+    boat_name: String,
+    boat_detail: String,
+    boat_price_per_person: String,
+    boat_qty: String,
+    boat_stay: String,
   },
 });
 

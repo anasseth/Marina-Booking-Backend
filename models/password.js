@@ -1,3 +1,4 @@
+// General Structure For Creating an API Model/Schema/Structure
 const mongoose = require("mongoose");
 
 const adminCredentialsSchema = new mongoose.Schema({
